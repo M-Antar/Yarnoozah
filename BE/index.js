@@ -10,36 +10,21 @@ const PORT = process.env.PORT || 3000;
 
 const allowedOrigins = [
   "http://localhost:8080",
+  "https://yarnoozah-sepia.vercel.app",
   "https://yarnoozah-gold.vercel.app",
   "https://yarnoozah-alpha.vercel.app",
   process.env.CLIENT_URL,
 ].filter(Boolean);
 
-const vercelPreview =
-  /^https:\/\/yarnoozah-9t62-[a-z0-9-]+\.vercel\.app$/;
-
-const isLan = (origin) =>
-  /^http:\/\/(192\.168\.|10\.|172\.(1[6-9]|2\d|3[01])\.)/.test(origin);
-
-// CORS must be registered before the API routes.
 app.use(
   cors({
     origin(origin, callback) {
-      // Allow requests without an Origin header.
-      if (!origin) {
-        return callback(null, true);
-      }
-
-      if (
-        allowedOrigins.includes(origin) ||
-        vercelPreview.test(origin) ||
-        isLan(origin)
-      ) {
+      if (!origin || allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
 
       console.warn("CORS blocked origin:", origin);
-      return callback(new Error("Origin not allowed by CORS"));
+      return callback(null, false);
     },
     methods: ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     exposedHeaders: ["x-cart-id"],
