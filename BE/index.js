@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 
 const allowedOrigins = [
   "http://localhost:8080",
-  "https://yarnoozah-9t62.vercel.app",
+  "https://yarnoozah3-z9j2vh2m.b4a.run",
   process.env.CLIENT_URL,
 ].filter(Boolean);
 
