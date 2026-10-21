@@ -50,4 +50,5 @@ coverage/
 *.bak
 
 #vercel
+FE/.vercel/output/FE/.vercel/output/
 FE/.vercel/output/
