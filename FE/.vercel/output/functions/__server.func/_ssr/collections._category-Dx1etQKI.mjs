@@ -1,5 +1,6 @@
-import { A as AboutPage } from "./Pages-BHins1j2.mjs";
-import "../_libs/react.mjs";
+import { j as jsxRuntimeExports } from "../_libs/react.mjs";
+import { b as CategoryPage } from "./Pages-CUm_pE5T.mjs";
+import { R as Route$2 } from "./router-DRF4lb9G.mjs";
 import "../_libs/tanstack__react-router.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
@@ -57,9 +58,8 @@ import "events";
 import "http2";
 import "../_libs/follow-redirects.mjs";
 import "zlib";
-import "./router-Cbswc_Q9.mjs";
 import "../_libs/lucide-react.mjs";
-const SplitComponent = AboutPage;
+const SplitComponent = () => /* @__PURE__ */ jsxRuntimeExports.jsx(CategoryPage, { slug: Route$2.useParams().category });
 export {
   SplitComponent as component
 };

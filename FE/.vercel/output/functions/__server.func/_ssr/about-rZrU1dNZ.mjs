@@ -1,4 +1,4 @@
-import { C as CartPage } from "./Pages-BHins1j2.mjs";
+import { A as AboutPage } from "./Pages-CUm_pE5T.mjs";
 import "../_libs/react.mjs";
 import "../_libs/tanstack__react-router.mjs";
 import "../_libs/tanstack__router-core.mjs";
@@ -57,9 +57,9 @@ import "events";
 import "http2";
 import "../_libs/follow-redirects.mjs";
 import "zlib";
-import "./router-Cbswc_Q9.mjs";
+import "./router-DRF4lb9G.mjs";
 import "../_libs/lucide-react.mjs";
-const SplitComponent = CartPage;
+const SplitComponent = AboutPage;
 export {
   SplitComponent as component
 };

@@ -2,7 +2,7 @@ import { Q as QueryClientProvider } from "../_libs/tanstack__react-query.mjs";
 import { b as QueryClient } from "../_libs/tanstack__query-core.mjs";
 import { c as createRouter, a as createRootRouteWithContext, b as createFileRoute, l as lazyRouteComponent, L as Link, H as HeadContent, S as Scripts, O as Outlet, u as useRouter, d as useRouterState } from "../_libs/tanstack__react-router.mjs";
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
-import { T as Trash2, M as Menu, S as Search, a as ShoppingBag, I as Instagram, X, A as ArrowRight } from "../_libs/lucide-react.mjs";
+import { T as Trash2, M as Menu, S as ShoppingBag, I as Instagram, X } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
 import "../_libs/seroval.mjs";
@@ -91,8 +91,17 @@ function useCart() {
 const UIContext = reactExports.createContext(void 0);
 function UIProvider({ children }) {
   const [isSlideMenuOpen, setMenu] = reactExports.useState(false);
-  const [isSearchOpen, setSearch] = reactExports.useState(false);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(UIContext.Provider, { value: { isSlideMenuOpen, isSearchOpen, openSlideMenu: () => setMenu(true), closeSlideMenu: () => setMenu(false), openSearch: () => setSearch(true), closeSearch: () => setSearch(false) }, children });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    UIContext.Provider,
+    {
+      value: {
+        isSlideMenuOpen,
+        openSlideMenu: () => setMenu(true),
+        closeSlideMenu: () => setMenu(false)
+      },
+      children
+    }
+  );
 }
 function useUI() {
   const c = reactExports.useContext(UIContext);
@@ -286,43 +295,6 @@ function Drawer({
     }
   );
 }
-function SearchOverlay() {
-  const { isSearchOpen, closeSearch } = useUI();
-  const [q, setQ] = reactExports.useState("");
-  const matches = q ? products.filter(
-    (p) => p.title.toLowerCase().includes(q.toLowerCase())
-  ) : [];
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `search-overlay ${isSearchOpen ? "is-open" : ""}`, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "search-box", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(IconButton, { label: "Close search", onClick: closeSearch, children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, {}) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("label", { children: "What are you looking for?" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Search, {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "input",
-        {
-          autoFocus: isSearchOpen,
-          value: q,
-          onChange: (e) => setQ(e.target.value),
-          placeholder: "Search crochet pieces..."
-        }
-      )
-    ] }),
-    q && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "search-results", children: matches.length ? matches.map((p) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      Link,
-      {
-        to: "/products/$id",
-        params: { id: p.slug },
-        onClick: closeSearch,
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: p.images[0], alt: "" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: p.title }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, {})
-        ]
-      },
-      p.id
-    )) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "No stitches match that search yet." }) })
-  ] }) });
-}
 function Header() {
   const {
     openSlideMenu,
@@ -338,20 +310,17 @@ function Header() {
     /* @__PURE__ */ jsxRuntimeExports.jsxs("nav", { className: "navbar", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(IconButton, { label: "Open menu", onClick: openSlideMenu, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Menu, {}) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: "/", className: "wordmark", children: "yarnoozah" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "nav-actions", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(IconButton, { label: "Search", onClick: openSearch, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Search, {}) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          IconButton,
-          {
-            label: `Cart with ${cartCount} items`,
-            onClick: openCart,
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(ShoppingBag, {}),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "cart-badge", children: cartCount })
-            ]
-          }
-        )
-      ] })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "nav-actions", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        IconButton,
+        {
+          label: `Cart with ${cartCount} items`,
+          onClick: openCart,
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(ShoppingBag, {}),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "cart-badge", children: cartCount })
+          ]
+        }
+      ) })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs(
       Drawer,
@@ -400,8 +369,7 @@ function Header() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(CartContent, { drawer: true })
         ]
       }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(SearchOverlay, {})
+    )
   ] });
 }
 function Footer() {
@@ -554,7 +522,7 @@ function RootComponent() {
   const { queryClient } = Route$a.useRouteContext();
   return /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ jsxRuntimeExports.jsx(UIProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CartProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Layout, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {}) }) }) }) });
 }
-const $$splitComponentImporter$9 = () => import("./index-B6zo9nx9.mjs");
+const $$splitComponentImporter$9 = () => import("./index-CbNf0oQp.mjs");
 const Route$9 = createFileRoute()({
   head: () => ({
     meta: [{
@@ -578,7 +546,7 @@ const Route$9 = createFileRoute()({
   }),
   component: lazyRouteComponent($$splitComponentImporter$9, "component")
 });
-const $$splitComponentImporter$8 = () => import("../_-D2NsQPat.mjs");
+const $$splitComponentImporter$8 = () => import("../_-CkIQKypG.mjs");
 const Route$8 = createFileRoute()({
   head: () => ({
     meta: [{
@@ -605,7 +573,7 @@ const Route$8 = createFileRoute()({
   }),
   component: lazyRouteComponent($$splitComponentImporter$8, "component")
 });
-const $$splitComponentImporter$7 = () => import("./about-NmnOCyCN.mjs");
+const $$splitComponentImporter$7 = () => import("./about-rZrU1dNZ.mjs");
 const Route$7 = createFileRoute()({
   head: () => ({
     meta: [{
@@ -629,7 +597,7 @@ const Route$7 = createFileRoute()({
   }),
   component: lazyRouteComponent($$splitComponentImporter$7, "component")
 });
-const $$splitComponentImporter$6 = () => import("./cart-D1IcHNRx.mjs");
+const $$splitComponentImporter$6 = () => import("./cart-GSKorJEt.mjs");
 const Route$6 = createFileRoute()({
   head: () => ({
     meta: [{
@@ -653,7 +621,7 @@ const Route$6 = createFileRoute()({
   }),
   component: lazyRouteComponent($$splitComponentImporter$6, "component")
 });
-const $$splitComponentImporter$5 = () => import("./checkout-Co2mQS_c.mjs");
+const $$splitComponentImporter$5 = () => import("./checkout-CCaySEVF.mjs");
 const Route$5 = createFileRoute()({
   head: () => ({
     meta: [{
@@ -677,7 +645,7 @@ const Route$5 = createFileRoute()({
   }),
   component: lazyRouteComponent($$splitComponentImporter$5, "component")
 });
-const $$splitComponentImporter$4 = () => import("./faq-BMot5GZk.mjs");
+const $$splitComponentImporter$4 = () => import("./faq-DnM3SWKG.mjs");
 const Route$4 = createFileRoute()({
   head: () => ({
     meta: [{
@@ -705,7 +673,7 @@ const $$splitComponentImporter$3 = () => import("./products-BFsOu0JM.mjs");
 const Route$3 = createFileRoute()({
   component: lazyRouteComponent($$splitComponentImporter$3, "component")
 });
-const $$splitComponentImporter$2 = () => import("./collections._category-r8t_jXhB.mjs");
+const $$splitComponentImporter$2 = () => import("./collections._category-Dx1etQKI.mjs");
 const Route$2 = createFileRoute()({
   head: ({
     params
@@ -736,7 +704,7 @@ const Route$2 = createFileRoute()({
   },
   component: lazyRouteComponent($$splitComponentImporter$2, "component")
 });
-const $$splitComponentImporter$1 = () => import("./products.index-Cgmro5kF.mjs");
+const $$splitComponentImporter$1 = () => import("./products.index-B8EW-7xB.mjs");
 const Route$1 = createFileRoute()({
   head: () => ({
     meta: [{
@@ -760,7 +728,7 @@ const Route$1 = createFileRoute()({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./products._id-DEFUns3k.mjs");
+const $$splitComponentImporter = () => import("./products._id-Dwl024R8.mjs");
 const Route = createFileRoute()({
   head: ({
     params

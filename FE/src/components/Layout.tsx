@@ -64,56 +64,7 @@ function Drawer({
     );
 }
 
-function SearchOverlay() {
-    const { isSearchOpen, closeSearch } = useUI();
-    const [q, setQ] = useState("");
 
-    const matches = q
-        ? products.filter((p) =>
-            p.title.toLowerCase().includes(q.toLowerCase()),
-        )
-        : [];
-
-    return (
-        <div className={`search-overlay ${isSearchOpen ? "is-open" : ""}`}>
-            <div className="search-box">
-                <IconButton label="Close search" onClick={closeSearch}>
-                    <X />
-                </IconButton>
-                <label>What are you looking for?</label>
-                <div>
-                    <Search />
-                    <input
-                        autoFocus={isSearchOpen}
-                        value={q}
-                        onChange={(e) => setQ(e.target.value)}
-                        placeholder="Search crochet pieces..."
-                    />
-                </div>
-                {q && (
-                    <div className="search-results">
-                        {matches.length ? (
-                            matches.map((p) => (
-                                <Link
-                                    key={p.id}
-                                    to="/products/$id"
-                                    params={{ id: p.slug }}
-                                    onClick={closeSearch}
-                                >
-                                    <img src={p.images[0]} alt="" />
-                                    <span>{p.title}</span>
-                                    <ArrowRight />
-                                </Link>
-                            ))
-                        ) : (
-                            <p>No stitches match that search yet.</p>
-                        )}
-                    </div>
-                )}
-            </div>
-        </div>
-    );
-}
 
 function Header() {
     const {
@@ -143,9 +94,6 @@ function Header() {
                 </Link>
 
                 <div className="nav-actions">
-                    <IconButton label="Search" onClick={openSearch}>
-                        <Search />
-                    </IconButton>
 
                     <IconButton
                         label={`Cart with ${cartCount} items`}
@@ -202,7 +150,7 @@ function Header() {
                 <CartContent drawer />
             </Drawer>
 
-            <SearchOverlay />
+           
         </>
     );
 }

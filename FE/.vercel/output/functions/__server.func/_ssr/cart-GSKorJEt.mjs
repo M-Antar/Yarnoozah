@@ -1,6 +1,5 @@
-import { j as jsxRuntimeExports } from "../_libs/react.mjs";
-import { c as ProductPage } from "./Pages-BHins1j2.mjs";
-import { a as Route } from "./router-Cbswc_Q9.mjs";
+import { C as CartPage } from "./Pages-CUm_pE5T.mjs";
+import "../_libs/react.mjs";
 import "../_libs/tanstack__react-router.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
@@ -58,8 +57,9 @@ import "events";
 import "http2";
 import "../_libs/follow-redirects.mjs";
 import "zlib";
+import "./router-DRF4lb9G.mjs";
 import "../_libs/lucide-react.mjs";
-const SplitComponent = () => /* @__PURE__ */ jsxRuntimeExports.jsx(ProductPage, { id: Route.useParams().id });
+const SplitComponent = CartPage;
 export {
   SplitComponent as component
 };

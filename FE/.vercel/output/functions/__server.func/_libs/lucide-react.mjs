@@ -75,16 +75,11 @@ const createLucideIcon = (iconName, iconNode) => {
   Component.displayName = toPascalCase(iconName);
   return Component;
 };
-const __iconNode$c = [
-  ["path", { d: "M5 12h14", key: "1ays0h" }],
-  ["path", { d: "m12 5 7 7-7 7", key: "xquz4c" }]
-];
-const ArrowRight = createLucideIcon("arrow-right", __iconNode$c);
-const __iconNode$b = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
-const ChevronDown = createLucideIcon("chevron-down", __iconNode$b);
-const __iconNode$a = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
-const ChevronRight = createLucideIcon("chevron-right", __iconNode$a);
-const __iconNode$9 = [
+const __iconNode$a = [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]];
+const ChevronDown = createLucideIcon("chevron-down", __iconNode$a);
+const __iconNode$9 = [["path", { d: "m9 18 6-6-6-6", key: "mthhwq" }]];
+const ChevronRight = createLucideIcon("chevron-right", __iconNode$9);
+const __iconNode$8 = [
   [
     "path",
     {
@@ -93,35 +88,30 @@ const __iconNode$9 = [
     }
   ]
 ];
-const Heart = createLucideIcon("heart", __iconNode$9);
-const __iconNode$8 = [
+const Heart = createLucideIcon("heart", __iconNode$8);
+const __iconNode$7 = [
   ["rect", { width: "20", height: "20", x: "2", y: "2", rx: "5", ry: "5", key: "2e1cvw" }],
   ["path", { d: "M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z", key: "9exkf1" }],
   ["line", { x1: "17.5", x2: "17.51", y1: "6.5", y2: "6.5", key: "r4j83e" }]
 ];
-const Instagram = createLucideIcon("instagram", __iconNode$8);
-const __iconNode$7 = [
+const Instagram = createLucideIcon("instagram", __iconNode$7);
+const __iconNode$6 = [
   ["circle", { cx: "12", cy: "16", r: "1", key: "1au0dj" }],
   ["rect", { x: "3", y: "10", width: "18", height: "12", rx: "2", key: "6s8ecr" }],
   ["path", { d: "M7 10V7a5 5 0 0 1 10 0v3", key: "1pqi11" }]
 ];
-const LockKeyhole = createLucideIcon("lock-keyhole", __iconNode$7);
-const __iconNode$6 = [
+const LockKeyhole = createLucideIcon("lock-keyhole", __iconNode$6);
+const __iconNode$5 = [
   ["path", { d: "M4 5h16", key: "1tepv9" }],
   ["path", { d: "M4 12h16", key: "1lakjw" }],
   ["path", { d: "M4 19h16", key: "1djgab" }]
 ];
-const Menu = createLucideIcon("menu", __iconNode$6);
-const __iconNode$5 = [
+const Menu = createLucideIcon("menu", __iconNode$5);
+const __iconNode$4 = [
   ["path", { d: "M5 12h14", key: "1ays0h" }],
   ["path", { d: "M12 5v14", key: "s699le" }]
 ];
-const Plus = createLucideIcon("plus", __iconNode$5);
-const __iconNode$4 = [
-  ["path", { d: "m21 21-4.34-4.34", key: "14j7rj" }],
-  ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }]
-];
-const Search = createLucideIcon("search", __iconNode$4);
+const Plus = createLucideIcon("plus", __iconNode$4);
 const __iconNode$3 = [
   ["path", { d: "M16 10a4 4 0 0 1-8 0", key: "1ltviw" }],
   ["path", { d: "M3.103 6.034h17.794", key: "awc11p" }],
@@ -161,17 +151,15 @@ const __iconNode = [
 ];
 const X = createLucideIcon("x", __iconNode);
 export {
-  ArrowRight as A,
   ChevronRight as C,
   Heart as H,
   Instagram as I,
   LockKeyhole as L,
   Menu as M,
   Plus as P,
-  Search as S,
+  ShoppingBag as S,
   Trash2 as T,
   X,
-  ShoppingBag as a,
-  Sparkles as b,
-  ChevronDown as c
+  Sparkles as a,
+  ChevronDown as b
 };

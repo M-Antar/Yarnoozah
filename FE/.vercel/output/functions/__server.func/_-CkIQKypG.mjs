@@ -1,4 +1,4 @@
-import { N as NotFoundPage } from "./_ssr/Pages-BHins1j2.mjs";
+import { N as NotFoundPage } from "./_ssr/Pages-CUm_pE5T.mjs";
 import "./_libs/react.mjs";
 import "./_libs/tanstack__react-router.mjs";
 import "./_libs/tanstack__router-core.mjs";
@@ -57,7 +57,7 @@ import "events";
 import "http2";
 import "./_libs/follow-redirects.mjs";
 import "zlib";
-import "./_ssr/router-Cbswc_Q9.mjs";
+import "./_ssr/router-DRF4lb9G.mjs";
 import "./_libs/lucide-react.mjs";
 const SplitComponent = NotFoundPage;
 export {

@@ -1,4 +1,4 @@
-import { F as FAQPage } from "./Pages-BHins1j2.mjs";
+import { a as CheckoutPage } from "./Pages-CUm_pE5T.mjs";
 import "../_libs/react.mjs";
 import "../_libs/tanstack__react-router.mjs";
 import "../_libs/tanstack__router-core.mjs";
@@ -57,9 +57,9 @@ import "events";
 import "http2";
 import "../_libs/follow-redirects.mjs";
 import "zlib";
-import "./router-Cbswc_Q9.mjs";
+import "./router-DRF4lb9G.mjs";
 import "../_libs/lucide-react.mjs";
-const SplitComponent = FAQPage;
+const SplitComponent = CheckoutPage;
 export {
   SplitComponent as component
 };
