@@ -1,0 +1,5 @@
+import {Link} from "@tanstack/react-router";import type {ButtonHTMLAttributes,ReactNode} from "react";
+export function Button({variant="primary",className="",...props}:ButtonHTMLAttributes<HTMLButtonElement>&{variant?:"primary"|"outline"|"soft"}){return <button className={`button button--${variant} ${className}`} {...props}/>}
+export function ButtonLink({to,children,variant="primary",className=""}:{to:string;children:ReactNode;variant?:"primary"|"outline"|"soft";className?:string}){return <Link to={to} className={`button button--${variant} ${className}`}>{children}</Link>}
+export function IconButton({label,children,...props}:ButtonHTMLAttributes<HTMLButtonElement>&{label:string;children:ReactNode}){return <button className="icon-button" aria-label={label} title={label} {...props}>{children}</button>}
+export function Quantity({value,onChange}:{value:number;onChange:(n:number)=>void}){return <div className="quantity" aria-label="Quantity"><Button variant="soft" aria-label="Decrease quantity" onClick={()=>onChange(value-1)}>−</Button><span>{value}</span><Button variant="soft" aria-label="Increase quantity" onClick={()=>onChange(value+1)}>+</Button></div>}

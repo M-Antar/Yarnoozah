@@ -1,0 +1,1 @@
+export function formatPrice(amount:number, compact=false){const value=new Intl.NumberFormat("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}).format(amount);return compact?`E£${value}`:`LE ${value} EGP`;}
