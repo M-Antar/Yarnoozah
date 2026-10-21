@@ -1,3 +1,4 @@
+
 import "dotenv/config";
 import os from "os";
 import cors from "cors";
@@ -9,33 +10,53 @@ const PORT = process.env.PORT || 3000;
 
 const allowedOrigins = [
   "http://localhost:8080",
-  "https://yarnoozah1-j1ymh6nz.b4a.run",
+  "https://yarnoozah-gold.vercel.app",
+  "https://yarnoozah-alpha.vercel.app",
   process.env.CLIENT_URL,
-].filter(Boolean);
+].filter((origin): origin is string => Boolean(origin));
 
-const vercelPreview = /^https:\/\/yarnoozah-9t62-[a-z0-9-]+\.vercel\.app$/;
+const vercelPreview =
+  /^https:\/\/yarnoozah-9t62-[a-z0-9-]+\.vercel\.app$/;
 
+const isLan = (origin: string) =>
+  /^http:\/\/(192\.168\.|10\.|172\.(1[6-9]|2\d|3[01])\.)/.test(origin);
+
+// CORS must be registered before the API routes.
 app.use(
   cors({
     origin(origin, callback) {
-      if (!origin) return callback(null, true);
-
-      const isLan = /^http:\/\/(192\.168|10\.|172\.(1[6-9]|2\d|3[01]))\./.test(origin);
-
-      if (allowedOrigins.includes(origin) || vercelPreview.test(origin) || isLan) {
+      // Allow requests without an Origin header (e.g. server-to-server).
+      if (!origin) {
         return callback(null, true);
       }
-      return callback(null, false);
+
+      if (
+        allowedOrigins.includes(origin) ||
+        vercelPreview.test(origin) ||
+        isLan(origin)
+      ) {
+        return callback(null, true);
+      }
+
+      console.warn("CORS blocked origin:", origin);
+      return callback(new Error("Origin not allowed by CORS"));
     },
+    methods: ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     exposedHeaders: ["x-cart-id"],
-  })
+  }),
 );
+
+app.use(express.json());
 
 app.use((req, res, next) => {
   const start = Date.now();
+
   res.on("finish", () => {
-    console.log(`${req.method} ${req.originalUrl} -> ${res.statusCode} (${Date.now() - start}ms)`);
+    console.log(
+      `${req.method} ${req.originalUrl} -> ${res.statusCode} (${Date.now() - start}ms)`,
+    );
   });
+
   next();
 });
 
@@ -46,13 +67,16 @@ app.get("/api/health", (req, res) => {
 bootstrap(app, express);
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`yarnoozah backend running on port ${PORT}`);
-  console.log(`  Local:   http://localhost:${PORT}`);
+  console.log(`Yarnoozah backend running on port ${PORT}`);
+  console.log(`Local: http://localhost:${PORT}`);
 
   for (const list of Object.values(os.networkInterfaces())) {
     for (const net of list ?? []) {
-      if ((net.family === "IPv4" || net.family === 4) && !net.internal) {
-        console.log(`  Network: http://${net.address}:${PORT}`);
+      if (
+        (net.family === "IPv4" || net.family === 4) &&
+        !net.internal
+      ) {
+        console.log(`Network: http://${net.address}:${PORT}`);
       }
     }
   }
