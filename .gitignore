@@ -48,3 +48,6 @@ coverage/
 # Temporary files
 *.tmp
 *.bak
+
+#vercel
+FE/.vercel/output/
