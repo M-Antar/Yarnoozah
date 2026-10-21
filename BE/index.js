@@ -13,19 +13,19 @@ const allowedOrigins = [
   "https://yarnoozah-gold.vercel.app",
   "https://yarnoozah-alpha.vercel.app",
   process.env.CLIENT_URL,
-].filter((origin): origin is string => Boolean(origin));
+].filter(Boolean);
 
 const vercelPreview =
   /^https:\/\/yarnoozah-9t62-[a-z0-9-]+\.vercel\.app$/;
 
-const isLan = (origin: string) =>
+const isLan = (origin) =>
   /^http:\/\/(192\.168\.|10\.|172\.(1[6-9]|2\d|3[01])\.)/.test(origin);
 
 // CORS must be registered before the API routes.
 app.use(
   cors({
     origin(origin, callback) {
-      // Allow requests without an Origin header (e.g. server-to-server).
+      // Allow requests without an Origin header.
       if (!origin) {
         return callback(null, true);
       }
