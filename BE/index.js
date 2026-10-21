@@ -7,9 +7,31 @@ import { bootstrap } from "./app.controller.js";
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Allow any origin in development (works from localhost, LAN IPs, and phones).
-// For production, replace `true` with: process.env.CLIENT_URL
-app.use(cors({ origin: true }));
+// Allowed frontends: local dev, your Vercel production domain, and any
+// Vercel preview URL for your project (they change on every deployment).
+const allowedOrigins = [
+  "http://localhost:8080",
+  "https://yarnoozah-9t62.vercel.app",
+  process.env.CLIENT_URL, // optional: extra origin set from Back4app env vars
+].filter(Boolean);
+
+const vercelPreview = /^https:\/\/yarnoozah-9t62-[a-z0-9-]+\.vercel\.app$/;
+
+app.use(
+  cors({
+    origin(origin, callback) {
+      // No Origin header = curl, server-to-server, health checks: allow.
+      if (!origin) return callback(null, true);
+
+      const isLan = /^http:\/\/(192\.168|10\.|172\.(1[6-9]|2\d|3[01]))\./.test(origin);
+
+      if (allowedOrigins.includes(origin) || vercelPreview.test(origin) || isLan) {
+        return callback(null, true);
+      }
+      return callback(null, false); // browser will block it, server doesn't crash
+    },
+  })
+);
 
 // Tiny request logger: shows method, URL (with query string), status, and time.
 app.use((req, res, next) => {
