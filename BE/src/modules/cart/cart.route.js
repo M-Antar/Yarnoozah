@@ -14,7 +14,7 @@ import {
   removeCartItem,
   clearCart,
 } from "./cart.service.js";
-import { cartId } from "../../middlewear/cartid.js";
+import { cartId } from "../../middlewear/cartId.js";
 
 export const cartRouter = new Router();
 cartRouter.use(cartId);
