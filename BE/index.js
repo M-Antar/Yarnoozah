@@ -7,12 +7,10 @@ import { bootstrap } from "./app.controller.js";
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Allowed frontends: local dev, your Vercel production domain, and any
-// Vercel preview URL for your project (they change on every deployment).
 const allowedOrigins = [
   "http://localhost:8080",
   "https://yarnoozah-9t62.vercel.app",
-  process.env.CLIENT_URL, // optional: extra origin set from Back4app env vars
+  process.env.CLIENT_URL,
 ].filter(Boolean);
 
 const vercelPreview = /^https:\/\/yarnoozah-9t62-[a-z0-9-]+\.vercel\.app$/;
@@ -20,7 +18,6 @@ const vercelPreview = /^https:\/\/yarnoozah-9t62-[a-z0-9-]+\.vercel\.app$/;
 app.use(
   cors({
     origin(origin, callback) {
-      // No Origin header = curl, server-to-server, health checks: allow.
       if (!origin) return callback(null, true);
 
       const isLan = /^http:\/\/(192\.168|10\.|172\.(1[6-9]|2\d|3[01]))\./.test(origin);
@@ -28,12 +25,12 @@ app.use(
       if (allowedOrigins.includes(origin) || vercelPreview.test(origin) || isLan) {
         return callback(null, true);
       }
-      return callback(null, false); // browser will block it, server doesn't crash
+      return callback(null, false);
     },
+    exposedHeaders: ["x-cart-id"],
   })
 );
 
-// Tiny request logger: shows method, URL (with query string), status, and time.
 app.use((req, res, next) => {
   const start = Date.now();
   res.on("finish", () => {
@@ -42,12 +39,10 @@ app.use((req, res, next) => {
   next();
 });
 
-// Quick check that the server is reachable: open /api/health in the browser.
 app.get("/api/health", (req, res) => {
   res.json({ ok: true, time: new Date().toISOString() });
 });
 
-// Mounts body parsers, routers (/api/products, /api/categories, ...) and the error handler.
 bootstrap(app, express);
 
 app.listen(PORT, "0.0.0.0", () => {

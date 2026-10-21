@@ -1,4 +1,3 @@
-import cors from "cors";
 import { connectDB } from "./src/db/index.js";
 
 import { categoryRouter } from "./src/modules/category/category.route.js";
@@ -9,12 +8,6 @@ import { newsletterRouter } from "./src/modules/newsletter/newsletter.route.js";
 import { errorHandler, notFoundHandler } from "./src/err/index.js";
 
 export function bootstrap(app, express) {
-  app.use(
-    cors({
-      origin: process.env.CLIENT_URL,
-      exposedHeaders: ["x-cart-id"],
-    })
-  );
   app.use(express.json());
 
   app.use("/api/categories", categoryRouter);
